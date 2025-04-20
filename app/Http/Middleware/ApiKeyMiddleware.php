@@ -24,8 +24,12 @@ class ApiKeyMiddleware
             && $request->header('api-key') == $apiKey
         );
 
-        abort_if (! $apiKeyIsValid, 403, 'Access denied');
-
-        return $next($request);
+        if (!$apiKeyIsValid) {
+            return response()->json([
+                'API Key tidak valid'
+            ], 403);
+        } else {
+            return $next($request);
+        }
     }
 }
