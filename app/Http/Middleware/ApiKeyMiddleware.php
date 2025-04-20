@@ -26,7 +26,7 @@ class ApiKeyMiddleware
 
         if (!$apiKeyIsValid) {
             return response()->json([
-                'API Key tidak valid'
+                'API Key tidak valid. Mohon input API Key yang sesuai.'
             ], 403);
         } else {
             return $next($request);
