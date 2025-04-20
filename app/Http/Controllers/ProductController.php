@@ -47,4 +47,41 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+    function detail($id) {
+        try {
+            $product = Product::findOrFail($id);
+
+            return response()->json([
+                'message' => "Data berhasil tampil",
+                'data' => $product
+            ], 200);
+        } catch(\Exception $e) {
+            return response()->json([
+                'message' => $e
+            ], 500);
+        }
+    }
+
+    function update(Request $request,$id) {
+        try {
+            $request->validate([
+                'name'=>'required|string',
+                'description'=>'required|string'
+            ]);
+
+            $product = Product::findOrFail($id);
+            $product->name = $request->get('name');
+            $product->description = $request->get('description');
+            $product->save();
+
+            return response()->json([
+                'message' => "Update successfully"
+            ], 200);
+        } catch(\Exception $e) {
+            return response()->json([
+                'message' => $e
+            ], 500);
+        }
+    }
 }
