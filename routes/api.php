@@ -15,7 +15,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::prefix('product')->group(function() {
+Route::prefix('products')->group(function() {
     Route::get('/', [ProductController::class, 'index'])->name('product.index');
     Route::post('/save', [ProductController::class, 'save'])->name('product.save');
     Route::delete('/{id}/delete', [ProductController::class, 'delete'])->name('product.delete');

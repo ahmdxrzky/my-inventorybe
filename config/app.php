@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'api_key' => env('APP_API_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

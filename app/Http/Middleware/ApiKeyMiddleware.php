@@ -17,10 +17,15 @@ class ApiKeyMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$key = $request->get('api_key')) {
-            return response()->json([
-                'API Key dibutuhkan, silahkan cek'
-            ], 403);
-        }
+        $apiKey = config('app.api_key');
+
+        $apiKeyIsValid = (
+            ! empty($apiKey)
+            && $request->header('api-key') == $apiKey
+        );
+
+        abort_if (! $apiKeyIsValid, 403, 'Access denied');
+
+        return $next($request);
     }
 }
